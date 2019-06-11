@@ -1,3 +1,7 @@
+``` sh
+cordova plugin add cordova-plugin-cnpush --variable APPID=HUAWEI_APPID --variable  PACKAGENAME=ANDROID_PACKAGENAME --variable cpid=HUAWEI_CPID
+```
+
 ``` js
 var pushNotification = window.plugins.pushNotification;
  pushNotification.register(

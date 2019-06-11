@@ -23,7 +23,12 @@ PushNotification.prototype.register = function (successCallback, errorCallback, 
         document.addEventListener('huaweipush.log', function (ev) {
             console.log(ev);
         });
-        document.addEventListener('huaweipush.receiveRegisterResult', successCallback);
+        document.addEventListener('huaweipush.receiveRegisterResult', function (result) {
+            console.log(result);
+            if (result.token != null) {
+                successCallback(result.token);
+            }
+        });
         document.addEventListener('huaweipush.notificationOpened', window[options.ecb]);
         cordova.exec(successCallback, errorCallback, "PushPlugin", "init", [options]);
     } else {
@@ -88,7 +93,7 @@ window.cordova.plugins.huaweipush.tokenRegistered = function (token) {
 // 透传消息
 window.cordova.plugins.huaweipush.pushMsgReceived = function (msg) {
     try {
-        msg.extras = JSON.parse(msg.extras);
+        //msg.extras = JSON.parse(msg.extras);
         cordova.fireDocumentEvent('huaweipush.pushMsgReceived', msg);
     } catch (exception) {
         console.log('HuaweiPush:pushMsgReceived ' + exception);
@@ -98,8 +103,8 @@ window.cordova.plugins.huaweipush.pushMsgReceived = function (msg) {
 window.cordova.plugins.huaweipush.notificationOpened = function (msg) {
     try {
         console.log(msg);
-        console.log(msg.extras);
-        msg.extras = JSON.parse(msg.extras);
+        //console.log(msg.extras);
+        //msg.extras = JSON.parse(msg.extras);
         cordova.fireDocumentEvent('huaweipush.notificationOpened', msg);
     } catch (exception) {
         console.log('HuaweiPush:notificationOpened ' + exception);
@@ -109,7 +114,8 @@ window.cordova.plugins.huaweipush.notificationOpened = function (msg) {
 //输出调试日志
 window.cordova.plugins.huaweipush.log = function (logStr) {
     var platform = device.platform;
-    if (platform.toLowerCase() == "android") {Î
+    if (platform.toLowerCase() == "android") {
+        Î
         try {
             cordova.fireDocumentEvent('huaweipush.log', logStr);
         } catch (exception) {
