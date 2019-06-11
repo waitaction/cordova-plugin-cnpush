@@ -20,17 +20,45 @@ PushNotification.prototype.register = function (successCallback, errorCallback, 
     }
     var platform = device.platform;
     if (platform.toLowerCase() == "android") {
-        document.addEventListener('huaweipush.log', function (ev) {
-            console.log(ev);
-        });
-        document.addEventListener('huaweipush.receiveRegisterResult', function (result) {
-            console.log(result);
-            if (result.token != null) {
-                successCallback(result.token);
+        if (device.manufacturer.toLowerCase().indexOf("huawei") >= 0) {
+            document.addEventListener('huaweipush.log', function (ev) {
+                console.log(ev);
+            });
+            document.addEventListener('huaweipush.receiveRegisterResult', function (result) {
+                console.log(result);
+                if (result.token != null) {
+                    successCallback(result.token);
+                }
+            });
+            document.addEventListener('huaweipush.notificationOpened', window[options.ecb]);
+            cordova.exec(successCallback, errorCallback, "PushPlugin", "init", [options]);
+        } else {
+            try {
+                function getRegistrationID() {
+                    window["plugins"].jPushPlugin.getRegistrationID((token) => {
+                        try {
+                            console.log(token);
+                            if (token.length == 0) {
+                                window.setTimeout(getRegistrationID, 1000);
+                            } else {
+                                successCallback(token);
+                            }
+                        } catch (exception) {
+                            console.log(exception);
+                        }
+                    });
+                }
+                window["plugins"].jPushPlugin.init();
+                document.addEventListener("jpush.openNotification", window[options.ecb], false);
+                window.setTimeout(getRegistrationID, 1000);
+                window["plugins"].jPushPlugin.setDebugMode(true);
+                window["plugins"].jPushPlugin.setStatisticsOpen(true);
+            } catch (exception) {
+                console.log("初始化极光推送失败");
+                console.log(exception);
             }
-        });
-        document.addEventListener('huaweipush.notificationOpened', window[options.ecb]);
-        cordova.exec(successCallback, errorCallback, "PushPlugin", "init", [options]);
+        }
+
     } else {
         cordova.exec(successCallback, errorCallback, "PushPlugin", "register", [options]);
     }
@@ -57,7 +85,12 @@ PushNotification.prototype.unregister = function (successCallback, errorCallback
 
     var platform = device.platform;
     if (platform.toLowerCase() == "android") {
-        cordova.exec(successCallback, errorCallback, "PushPlugin", "stop", []);
+        if (device.manufacturer.toLowerCase().indexOf("huawei") >= 0) {
+            cordova.exec(successCallback, errorCallback, "PushPlugin", "stop", []);
+        } else {
+
+        }
+
     } else {
         cordova.exec(successCallback, errorCallback, "PushPlugin", "unregister", [options]);
     }
