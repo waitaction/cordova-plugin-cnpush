@@ -1,0 +1,33 @@
+{
+  "name": "cordova-plugin-cnpush",
+  "version": "2.6.1",
+  "description": "Cordova huawei PushPay Plugin",
+  "cordova": {
+    "id": "cordova-plugin-cnpush",
+    "platforms": [
+      "android"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/waitaction/cordova-plugin-cnpush.git"
+  },
+  "keywords": [
+    "cordova",
+    "cordova-android",
+    "device",
+    "push",
+    "huawei",
+    "ecosystem:cordova",
+    "hms"
+  ],
+  "author": "waitaction",
+  "license": "Apache License",
+  "peerDependencies": {
+    "cordova-plugin-device": ">=1.0.0"
+  },
+  "bugs": {
+    "url": "https://github.com/waitaction/cordova-plugin-cnpush/issues"
+  },
+  "homepage": "https://github.com/waitaction/cordova-plugin-cnpush#readme"
+}
