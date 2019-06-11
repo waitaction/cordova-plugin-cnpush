@@ -1,6 +1,11 @@
 ``` sh
 cordova plugin add cordova-plugin-cnpush --variable APPID=HUAWEI_APPID --variable  PACKAGENAME=ANDROID_PACKAGENAME --variable cpid=HUAWEI_CPID --variable JPUSH_APP_KEY=JPUSH_APP_KEY
 ```
+> 在中国大陆地区使用。
+> 如果是华为安卓手机，则使用华为推送sdk。
+> 如果是苹果手机，则使用苹果推送sdk。
+> 其它是其它安卓手机，则使用极光推送sdk。
+
 
 ``` js
 var pushNotification = PushNotification;
