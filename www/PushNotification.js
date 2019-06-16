@@ -39,7 +39,7 @@ PushNotification.prototype.register = function (successCallback, errorCallback, 
                         try {
                             console.log(token);
                             if (token.length == 0) {
-                                window.setTimeout(getRegistrationID, 1000);
+                                window.setTimeout(getRegistrationID, 120000);
                             } else {
                                 successCallback(token);
                             }
