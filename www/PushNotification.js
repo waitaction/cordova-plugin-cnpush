@@ -35,7 +35,7 @@ PushNotification.prototype.register = function (successCallback, errorCallback, 
         } else {
             try {
                 function getRegistrationID() {
-                    window["plugins"].jPushPlugin.getRegistrationID((token) => {
+                    window["plugins"].jPushPlugin.getRegistrationID(function (token) {
                         try {
                             console.log(token);
                             if (token.length == 0) {
