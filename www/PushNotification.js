@@ -31,7 +31,7 @@ PushNotification.prototype.register = function (successCallback, errorCallback, 
                 }
             });
             document.addEventListener('huaweipush.notificationOpened', window[options.ecb]);
-            cordova.exec(successCallback, errorCallback, "PushPlugin", "init", [options]);
+            cordova.exec(function (result) { }, errorCallback, "PushPlugin", "init", [options]);
         } else {
             try {
                 function getRegistrationID() {
@@ -148,7 +148,6 @@ window.cordova.plugins.huaweipush.notificationOpened = function (msg) {
 window.cordova.plugins.huaweipush.log = function (logStr) {
     var platform = device.platform;
     if (platform.toLowerCase() == "android") {
-        Î
         try {
             cordova.fireDocumentEvent('huaweipush.log', logStr);
         } catch (exception) {

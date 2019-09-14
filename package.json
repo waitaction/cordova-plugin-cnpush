@@ -1,6 +1,6 @@
 {
   "name": "cordova-plugin-cnpush",
-  "version": "2.6.6",
+  "version": "2.6.7",
   "description": "Cordova huawei PushPay Plugin",
   "cordova": {
     "id": "cordova-plugin-cnpush",

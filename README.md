@@ -1,11 +1,26 @@
+# 中国大陆地区统一推送cordova插件
+
+## 说明
+
+后端推送因精力问题，暂未开源，可参考华为、极光、苹果开发者官方的相关文档
+
+> 在中国大陆地区使用。
+> 如果是华为安卓手机，则插件默认调用华为推送sdk。
+> 如果是苹果手机，则插件默认调用苹果推送sdk。
+> 其它是其它安卓手机，则插件默认调用极光推送sdk。
+
+## 环境
+
+cordova@9.0.0
+cordova-android@8.0.0
+
+## 安装
+
 ``` sh
 cordova plugin add cordova-plugin-cnpush --variable APPID=HUAWEI_APPID --variable  PACKAGENAME=ANDROID_PACKAGENAME --variable cpid=HUAWEI_CPID --variable JPUSH_APP_KEY=JPUSH_APP_KEY
 ```
-> 在中国大陆地区使用。
-> 如果是华为安卓手机，则使用华为推送sdk。
-> 如果是苹果手机，则使用苹果推送sdk。
-> 其它是其它安卓手机，则使用极光推送sdk。
 
+## 调用
 
 ``` js
 var pushNotification = PushNotification;
@@ -20,32 +35,24 @@ window["onNotificationAPN"] = onNotificationAPN;
          "ecb": "onNotificationAPN"
 });
 
+/*读取到token*/
 function tokenHandler(result) {
-    // Your iOS push server needs to know the token before it can push to this device
-    // here is where you might want to send it the token for later use.
     alert('device token = ' + result);
 }
-// result contains any error description text returned from the plugin call
+
 function errorHandler(error) {
     alert('error = ' + error);
 }
-// iOS
+
+/*接收到通知*/
 function onNotificationAPN(event) {
-	/*接收到的数据类型 {"sound":"default","body":"body","title":"title","customkey":"test","foreground":"1"}*/
-    alert("onNotificationAPN");
-    console.log(event);
-    if (event.alert) {
-       // navigator.notification.alert(event.alert);
+    if (event && event.type == "jpush.openNotification" && event.extras) {
+        //极光推送
+        //to do
     }
-
-    if (event.sound) {
-       // var snd = new Media(event.sound);
-        //snd.play();
-    }
-
-    if (event.badge) {
-        //pushNotification.setApplicationIconBadgeNumber(successHandler, errorHandler, event.badge);
+    if (event && event.extras) {
+        //华为推送
+        //to do
     }
 }
-
 ```
