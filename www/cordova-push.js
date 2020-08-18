@@ -14,7 +14,7 @@ CordovaPush.prototype.register = function (successCallback, errorCallback, optio
 
 
 
-module.exports = new PushNotification();
+module.exports = new CordovaPush();
 
 
 

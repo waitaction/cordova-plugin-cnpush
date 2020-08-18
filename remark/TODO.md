@@ -9,10 +9,6 @@ keytool -list -v -keystore /Users/chenqj/Desktop/demo/testhms/listing.keystore
 https://developer.huawei.com/consumer/cn/codelab/HMSPreparation/index.html#8
 
 
-生成的证书：
-密码 123456
-别名 listing.keystore
-别名密码 123456
 
 https://developer.huawei.com/consumer/cn/codelab/HMSPreparation/index.html
 

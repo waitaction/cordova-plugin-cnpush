@@ -10,7 +10,7 @@
     </engines>
 
     <js-module name="CordovaPush" src="www/cordova-push.js">
-        <clobbers target="cordovaPush" />
+        <clobbers target="cnPush" />
     </js-module>
 
     <platform name="android">
@@ -47,6 +47,9 @@
         <!--java-->
         <source-file src="src/android/CordovaPush.java" target-dir="src/com/lifang123/push/" />
         <source-file src="src/android/HuaweiPushService.java" target-dir="src/com/lifang123/push/" />
+        <source-file src="src/android/HuaweiReceiver.java" target-dir="src/com/lifang123/push/" />
+        <!--hook-->
+        <hook type="before_plugin_install" src="scripts/android/before_plugin_install.js" />
     </platform>
 
 

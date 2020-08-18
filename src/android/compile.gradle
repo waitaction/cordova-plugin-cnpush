@@ -1,24 +1,4 @@
 apply plugin: 'com.huawei.agconnect'
-buildscript {
-    repositories {
-        mavenCentral()
-        google()
-        jcenter()
-        maven { url 'https://developer.huawei.com/repo/' }
-    }
-
-    dependencies {
-        classpath 'com.android.tools.build:gradle:3.3.0'
-    }
-}
-
-allprojects {
-    repositories {
-        mavenCentral()
-        jcenter()
-        maven { url 'https://developer.huawei.com/repo/' }
-    }
-}
 
 dependencies {
     implementation 'com.huawei.hms:push:4.0.3.301'
