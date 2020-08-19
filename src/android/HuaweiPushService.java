@@ -44,7 +44,7 @@ public class HuaweiPushService extends HmsMessageService {
         // RemoteMessage.Notification notification = message.getNotification();
         Intent intent = new Intent();
         intent.setAction(CODELABS_ACTION);
-        intent.putExtra("method", "透传消息");
+        intent.putExtra("_method", "透传消息");
         intent.putExtra("_push_msgid", message.getMessageId());
         intent.putExtra("sendTime", message.getSentTime());
 
