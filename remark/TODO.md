@@ -224,3 +224,6 @@ import com.huawei.hms.common.ApiException;
     }
 
 ```
+
+
+用透传是可以接收到

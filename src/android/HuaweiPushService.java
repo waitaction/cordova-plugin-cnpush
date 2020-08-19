@@ -3,13 +3,18 @@ package com.lifang123.push;
 import android.content.Intent;
 import android.text.TextUtils;
 import android.util.Log;
+
 import com.huawei.hms.push.HmsMessageService;
 import com.huawei.hms.push.RemoteMessage;
 import com.huawei.hms.push.SendException;
-import java.util.Arrays;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.Iterator;
 
 public class HuaweiPushService extends HmsMessageService {
-    private static final String TAG = "PushDemoLog";
+    private static final String TAG = "HuaweiPushTag";
     private final static String CODELABS_ACTION = "com.huawei.codelabpush.action";
 
     @Override
@@ -20,10 +25,11 @@ public class HuaweiPushService extends HmsMessageService {
         }
         Intent intent = new Intent();
         intent.setAction(CODELABS_ACTION);
-        intent.putExtra("method", "onNewToken");
-        intent.putExtra("msg", "onNewToken called, token: " + token);
+        intent.putExtra("method", "token被刷新");
+        intent.putExtra("token", token);
         sendBroadcast(intent);
     }
+
     private void refreshedTokenToServer(String token) {
         Log.i(TAG, "sending token to server. token:" + token);
     }
@@ -35,42 +41,30 @@ public class HuaweiPushService extends HmsMessageService {
             Log.e(TAG, "Received message entity is null!");
             return;
         }
-
-        Log.i(TAG, "getCollapseKey: " + message.getCollapseKey()
-                + "\n getData: " + message.getData()
-                + "\n getFrom: " + message.getFrom()
-                + "\n getTo: " + message.getTo()
-                + "\n getMessageId: " + message.getMessageId()
-                + "\n getOriginalUrgency: " + message.getOriginalUrgency()
-                + "\n getUrgency: " + message.getUrgency()
-                + "\n getSendTime: " + message.getSentTime()
-                + "\n getMessageType: " + message.getMessageType()
-                + "\n getTtl: " + message.getTtl());
-
-        RemoteMessage.Notification notification = message.getNotification();
-        if (notification != null) {
-            Log.i(TAG, "\n getImageUrl: " + notification.getImageUrl()
-                    + "\n getTitle: " + notification.getTitle()
-                    + "\n getTitleLocalizationKey: " + notification.getTitleLocalizationKey()
-                    + "\n getTitleLocalizationArgs: " + Arrays.toString(notification.getTitleLocalizationArgs())
-                    + "\n getBody: " + notification.getBody()
-                    + "\n getBodyLocalizationKey: " + notification.getBodyLocalizationKey()
-                    + "\n getBodyLocalizationArgs: " + Arrays.toString(notification.getBodyLocalizationArgs())
-                    + "\n getIcon: " + notification.getIcon()
-                    + "\n getSound: " + notification.getSound()
-                    + "\n getTag: " + notification.getTag()
-                    + "\n getColor: " + notification.getColor()
-                    + "\n getClickAction: " + notification.getClickAction()
-                    + "\n getChannelId: " + notification.getChannelId()
-                    + "\n getLink: " + notification.getLink()
-                    + "\n getNotifyId: " + notification.getNotifyId());
-        }
-
+        // RemoteMessage.Notification notification = message.getNotification();
         Intent intent = new Intent();
         intent.setAction(CODELABS_ACTION);
-        intent.putExtra("method", "onMessageReceived");
-        intent.putExtra("msg", "onMessageReceived called, message id:" + message.getMessageId() + ", payload data:"
-                + message.getData());
+        intent.putExtra("method", "透传消息");
+        intent.putExtra("_push_msgid", message.getMessageId());
+        intent.putExtra("sendTime", message.getSentTime());
+
+        try {
+            JSONObject result = new JSONObject(message.getData());
+
+            for (Iterator itr = result.keys(); itr.hasNext(); ) {
+
+                try {
+                    String key = (String) itr.next();
+                    String content = result.getString(key);
+                    intent.putExtra(key, content);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
         sendBroadcast(intent);
 
@@ -86,6 +80,7 @@ public class HuaweiPushService extends HmsMessageService {
     private void startWorkManagerJob(RemoteMessage message) {
         Log.d(TAG, "Start new Job processing.");
     }
+
     private void processWithin10s(RemoteMessage message) {
         Log.d(TAG, "Processing now.");
     }

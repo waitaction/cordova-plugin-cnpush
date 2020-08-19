@@ -36,11 +36,12 @@
         </config-file>
         <!--添加服务-->
         <config-file target="AndroidManifest.xml" parent="/manifest/application">
-            <service android:name="com.lifang123.huaweipush.HuaHuiPushService" android:exported="false">
+            <service android:name="com.lifang123.push.HuaweiPushService" android:exported="false">
                 <intent-filter>
                     <action android:name="com.huawei.push.action.MESSAGING_EVENT" />
                 </intent-filter>
             </service>
+            <receiver android:name="com.lifang123.push.HuaweiReceiver" />
         </config-file>
         <!--gradle-->
         <framework src="src/android/compile.gradle" custom="true" type="gradleReference" />
@@ -50,6 +51,7 @@
         <source-file src="src/android/HuaweiReceiver.java" target-dir="src/com/lifang123/push/" />
         <!--hook-->
         <hook type="before_plugin_install" src="scripts/android/before_plugin_install.js" />
+        <hook type="before_plugin_uninstall" src="scripts/android/before_plugin_uninstall.js"/>
     </platform>
 
 
