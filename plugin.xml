@@ -8,6 +8,9 @@
     <engines>
         <engine name="cordova" version=">=3.0" />
     </engines>
+    <preference name="JPUSH_APP_KEY" />
+    <preference name="CHANNEL" default="developer-default" />
+    <dependency id="cordova-plugin-android-jpush" url="https://github.com/waitaction/cordova-plugin-android-jpush.git" commit="ee3e6b9e75b9d4d14727bcb3cd80bfc78e373d85" />
 
     <js-module name="CordovaPush" src="www/cordova-push.js">
         <clobbers target="cnPush" />

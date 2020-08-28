@@ -1,6 +1,7 @@
 
 var CordovaPush = function () { };
-
+var jpush = require('./jpush');
+var tool = require('./tool');
 
 /**
  * 注册推送服务
@@ -9,7 +10,12 @@ var CordovaPush = function () { };
  * @param options 参数
  */
 CordovaPush.prototype.register = function (successCallback, errorCallback, options) {
-    cordova.exec(successCallback, errorCallback, "CordovaPushPlugin", "register", [options]);
+    if (tool.isPlatformHuawei || tool.isPlatformIOS) {
+        cordova.exec(successCallback, errorCallback, "CordovaPushPlugin", "register", [options]);
+    } else {
+        // 注册jPush
+        jpush.register(successCallback);
+    }
 };
 
 /**
@@ -18,7 +24,11 @@ CordovaPush.prototype.register = function (successCallback, errorCallback, optio
  * @param errorCallback 通知失败的回调
  */
 CordovaPush.prototype.onNewToken = function (successCallback, errorCallback) {
-    cordova.exec(successCallback, errorCallback, "CordovaPushPlugin", "onNewToken", [options]);
+    if (tool.isPlatformHuawei || tool.isPlatformIOS) {
+        cordova.exec(successCallback, errorCallback, "CordovaPushPlugin", "onNewToken", [options]);
+    } else {
+        jpush.onNewToken(successCallback);
+    }
 };
 
 //cordova.fireDocumentEvent('messageReceived', msg); //接收到消息的事件
