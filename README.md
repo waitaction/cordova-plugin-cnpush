@@ -1,6 +1,20 @@
  # 统一推送
 
-> 暂时只添加了华为推送HMS SDK
+ 华为手机统一使用华为HMS系统级推送，其它手机统一使用极光推送
+
+ > 苹果推送暂未集成
+
+ 安装前需要手机安装各依赖插件
+
+``` shell
+cordova plugin add cordova-plugin-android-jpush --variable APP_KEY=your_jpush_appkey
+ ```
+
+安装`cordova-plugin-cnpush`
+
+ ```
+ cordova plugin add cordova-plugin-cnpush
+ ```
 
 ## 华为推送配置
 
@@ -29,7 +43,8 @@
     }
 }
 ```
-> `build.json`的上述配置需要改成你自已的配置信息
+
+> `build.json` 的上述配置需要改成你自已的配置信息
 
 如需调试，需要在真实的设备，使用以下命令调试
 
