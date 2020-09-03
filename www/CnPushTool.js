@@ -1,9 +1,9 @@
-var Tool = function () { };
+var CnPushTool = function () { };
 
 /**
  * 是否是苹果设备
  */
-Tool.prototype.isPlatformIOS = function () {
+CnPushTool.prototype.isPlatformIOS = function () {
     return (
         device.platform === "iPhone" ||
         device.platform === "iPad" ||
@@ -15,29 +15,29 @@ Tool.prototype.isPlatformIOS = function () {
 /**
  * 是否是华为设备
  */
-Tool.prototype.isPlatformHuawei = function () {
+CnPushTool.prototype.isPlatformHuawei = function () {
     return device.manufacturer.toLowerCase().indexOf("huawei") >= 0;
 }
 
 /**
  * 是否是vivo设备
  */
-Tool.prototype.isPlatformVivo = function () {
+CnPushTool.prototype.isPlatformVivo = function () {
     return device.manufacturer.toLowerCase().indexOf("vivo") >= 0;
 }
 
 /**
  * 是否是oppo设备
  */
-Tool.prototype.isPlatformOppo = function () {
+CnPushTool.prototype.isPlatformOppo = function () {
     return device.manufacturer.toLowerCase().indexOf("oppo") >= 0;
 }
 
 /**
  * 是否是xiaomi设备
  */
-Tool.prototype.isPlatformXiaomi = function () {
+CnPushTool.prototype.isPlatformXiaomi = function () {
     return device.manufacturer.toLowerCase().indexOf("xiaomi") >= 0;
 }
 
-module.exports = new Tool();
+module.exports =new CnPushTool();

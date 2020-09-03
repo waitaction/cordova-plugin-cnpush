@@ -13,6 +13,9 @@
         <clobbers target="cnPush" />
     </js-module>
 
+    <js-module src="www/CnJPush.js" name="CnJPush"></js-module>
+    <js-module src="www/CnPushTool.js" name="CnPushTool"></js-module>
+
     <platform name="android">
         <!--cordova桥接-->
         <config-file parent="/*" target="res/xml/config.xml">

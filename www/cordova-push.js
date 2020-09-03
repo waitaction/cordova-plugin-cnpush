@@ -1,7 +1,7 @@
 
 var CordovaPush = function () { };
-var jpush = require('./jpush');
-var tool = require('./tool');
+var cnJPush = require('./CnJPush');
+var cnPushTool = require('./CnPushTool');
 
 /**
  * 注册推送服务
@@ -10,11 +10,11 @@ var tool = require('./tool');
  * @param options 参数
  */
 CordovaPush.prototype.register = function (successCallback, errorCallback, options) {
-    if (tool.isPlatformHuawei || tool.isPlatformIOS) {
+    if (cnPushTool.isPlatformHuawei || cnPushTool.isPlatformIOS) {
         cordova.exec(successCallback, errorCallback, "CordovaPushPlugin", "register", [options]);
     } else {
         // 注册jPush
-        jpush.register(successCallback);
+        cnJPush.register(successCallback);
     }
 };
 
@@ -24,10 +24,10 @@ CordovaPush.prototype.register = function (successCallback, errorCallback, optio
  * @param errorCallback 通知失败的回调
  */
 CordovaPush.prototype.onNewToken = function (successCallback, errorCallback) {
-    if (tool.isPlatformHuawei || tool.isPlatformIOS) {
+    if (cnPushTool.isPlatformHuawei || cnPushTool.isPlatformIOS) {
         cordova.exec(successCallback, errorCallback, "CordovaPushPlugin", "onNewToken", [options]);
     } else {
-        jpush.onNewToken(successCallback);
+        cnJPush.onNewToken(successCallback);
     }
 };
 
