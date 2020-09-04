@@ -1,4 +1,3 @@
-
 var CordovaPush = function () { };
 var cnJPush = require('./CnJPush');
 var cnPushTool = require('./CnPushTool');
@@ -10,7 +9,7 @@ var cnPushTool = require('./CnPushTool');
  * @param options 参数
  */
 CordovaPush.prototype.register = function (successCallback, errorCallback, options) {
-    if (cnPushTool.isPlatformHuawei || cnPushTool.isPlatformIOS) {
+    if (cnPushTool.isPlatformHuawei() || cnPushTool.isPlatformIOS()) {
         cordova.exec(successCallback, errorCallback, "CordovaPushPlugin", "register", [options]);
     } else {
         // 注册jPush
@@ -30,8 +29,6 @@ CordovaPush.prototype.onNewToken = function (successCallback, errorCallback) {
         cnJPush.onNewToken(successCallback);
     }
 };
-
-//cordova.fireDocumentEvent('messageReceived', msg); //接收到消息的事件
 
 module.exports = new CordovaPush();
 
