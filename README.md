@@ -36,7 +36,7 @@ cnPush.register(function(token) {
 }, []);
 
 // 接收token
-jPush.onNewToken(function(token) {
+cnPush.onNewToken(function(token) {
     console.log(token); // 会多次接收到token
 });
 ```
