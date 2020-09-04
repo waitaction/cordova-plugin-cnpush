@@ -1,5 +1,0 @@
-apply plugin: 'com.huawei.agconnect'
-
-dependencies {
-    implementation 'com.huawei.hms:push:4.0.3.301'
-}

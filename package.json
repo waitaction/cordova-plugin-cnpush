@@ -1,6 +1,6 @@
 {
   "name": "cordova-plugin-cnpush",
-  "version": "2.6.7",
+  "version": "1.0.0",
   "description": "Cordova Push Plugin",
   "cordova": {
     "id": "cordova-plugin-cnpush",
@@ -17,9 +17,7 @@
     "cordova-android",
     "device",
     "push",
-    "huawei",
-    "ecosystem:cordova",
-    "hms"
+    "ecosystem:cordova"
   ],
   "author": "waitaction",
   "license": "Apache License",

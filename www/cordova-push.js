@@ -1,6 +1,29 @@
-var CordovaPush = function () { };
-var cnJPush = require('./CnJPush');
 var cnPushTool = require('./CnPushTool');
+
+
+var CordovaPush = function () {
+
+};
+
+function getCordovaPush() {
+    var myPush;
+    if (cnPushTool.isPlatformHuawei()) {
+        //华为手机
+        if (window.huaweiPush) {
+            myPush = window.huaweiPush;
+        } else {
+            if (window.jPush) {
+                myPush = window.jPush;
+            }
+        }
+    } else {
+        //其它手机
+        if (window.jPush) {
+            myPush = window.jPush;
+        }
+    }
+    return myPush;
+}
 
 /**
  * 注册推送服务
@@ -9,12 +32,9 @@ var cnPushTool = require('./CnPushTool');
  * @param options 参数
  */
 CordovaPush.prototype.register = function (successCallback, errorCallback, options) {
-    if (cnPushTool.isPlatformHuawei() || cnPushTool.isPlatformIOS()) {
-        cordova.exec(successCallback, errorCallback, "CordovaPushPlugin", "register", [options]);
-    } else {
-        // 注册jPush
-        cnJPush.register(successCallback);
-    }
+    document.addEventListener('deviceready', function () {
+        getCordovaPush().register(successCallback, errorCallback, options);
+    }, false);
 };
 
 /**
@@ -23,11 +43,9 @@ CordovaPush.prototype.register = function (successCallback, errorCallback, optio
  * @param errorCallback 通知失败的回调
  */
 CordovaPush.prototype.onNewToken = function (successCallback, errorCallback) {
-    if (cnPushTool.isPlatformHuawei || cnPushTool.isPlatformIOS) {
-        cordova.exec(successCallback, errorCallback, "CordovaPushPlugin", "onNewToken", [options]);
-    } else {
-        cnJPush.onNewToken(successCallback);
-    }
+    document.addEventListener('deviceready', function () {
+        getCordovaPush().onNewToken(successCallback, errorCallback);
+    }, false);
 };
 
 module.exports = new CordovaPush();

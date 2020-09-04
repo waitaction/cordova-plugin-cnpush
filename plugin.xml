@@ -1,10 +1,10 @@
 <?xml version='1.0' encoding='utf-8'?>
-<plugin id="cordova-plugin-cnpush" version="2.6.7" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+<plugin id="cordova-plugin-cnpush" version="1.0.0" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
     <name>cordova-plugin-cnpush</name>
     <description>Cordova Chinese Push Plugin</description>
     <author>350561378@qq.com</author>
     <license>Apache License</license>
-    <keywords>cordova,huawei,push,pay</keywords>
+    <keywords>cordova,huawei,push</keywords>
     <engines>
         <engine name="cordova" version=">=3.0" />
     </engines>
@@ -13,48 +13,10 @@
         <clobbers target="cnPush" />
     </js-module>
 
-    <js-module src="www/CnJPush.js" name="CnJPush"></js-module>
     <js-module src="www/CnPushTool.js" name="CnPushTool"></js-module>
 
     <platform name="android">
-        <!--cordova桥接-->
-        <config-file parent="/*" target="res/xml/config.xml">
-            <feature name="CordovaPushPlugin">
-                <param name="android-package" value="com.lifang123.push.CordovaPush" />
-            </feature>
-        </config-file>
-        <!--权限-->
-        <config-file target="AndroidManifest.xml" parent="/manifest">
-            <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT" />
-            <uses-permission android:name="android.permission.INTERNET" />
-            <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-            <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-            <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-            <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
-            <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-            <uses-permission android:name="android.permission.WRITE_SETTINGS" />
-            <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-            <uses-permission android:name="android.permission.VIBRATE" />
-            <uses-permission android:name="android.permission.WAKE_LOCK" />
-        </config-file>
-        <!--添加服务-->
-        <config-file target="AndroidManifest.xml" parent="/manifest/application">
-            <service android:name="com.lifang123.push.HuaweiPushService" android:exported="false">
-                <intent-filter>
-                    <action android:name="com.huawei.push.action.MESSAGING_EVENT" />
-                </intent-filter>
-            </service>
-            <receiver android:name="com.lifang123.push.HuaweiReceiver" />
-        </config-file>
-        <!--gradle-->
-        <framework src="src/android/compile.gradle" custom="true" type="gradleReference" />
-        <!--java-->
-        <source-file src="src/android/CordovaPush.java" target-dir="src/com/lifang123/push/" />
-        <source-file src="src/android/HuaweiPushService.java" target-dir="src/com/lifang123/push/" />
-        <source-file src="src/android/HuaweiReceiver.java" target-dir="src/com/lifang123/push/" />
-        <!--hook-->
-        <hook type="before_plugin_install" src="scripts/android/before_plugin_install.js" />
-        <hook type="before_plugin_uninstall" src="scripts/android/before_plugin_uninstall.js"/>
+         
     </platform>
 
 
