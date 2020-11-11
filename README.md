@@ -1,25 +1,37 @@
- # 统一推送
+# 统一推送
 
-cordova应用统一推送，安装前需要先安装依赖插件:
+安装 `cordova-plugin-cnpush`
+ 
+``` shell
+ cordova plugin add cordova-plugin-cnpush
+```
 
-安装 `极光推送安卓版本` 插件
+> cordova应用统一推送，可以安装下列插件，`cordova-plugin-cnpush`会根据手机型号优先使用`厂商sdk`的cordova插件
+
+## 安卓手机推送(非厂商sdk)
+
+其它安卓手机使用推送，安装 `极光推送安卓版本(免费版)` 插件
 
 ``` shell
 cordova plugin add cordova-plugin-android-jpush --variable APP_KEY=your_jpush_appkey
 ```
 
-安装 `华为推送` 插件
+## 华为推送(厂商sdk)
+
+如需在`华为手机`使用系统级推送，请安装 `华为推送` 插件
 
 ``` shell
 cordova plugin add cordova-plugin-huawei-push
 ```
 
-安装 `cordova-plugin-cnpush`
- 
+## OPPO推送(厂商sdk)
+
+如需在`OPPO手机`使用系统级推送，请安装 `OPPO推送` 插件
 
 ``` shell
- cordova plugin add cordova-plugin-cnpush
+cordova plugin add cordova-plugin-oppo-push --variable  APP_KEY=YOUR_APP_KEY --variable APP_SECRET=YOUR_APP_SECRET
 ```
+
 
 > 各依赖插件的配置，请参考插件官方文档
 

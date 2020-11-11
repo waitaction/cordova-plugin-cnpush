@@ -7,21 +7,29 @@ var CordovaPush = function () {
 
 function getCordovaPush() {
     var myPush;
+    var isUsePush = false
+    //华为手机
     if (cnPushTool.isPlatformHuawei()) {
-        //华为手机
         if (window.huaweiPush) {
             myPush = window.huaweiPush;
-        } else {
-            if (window.jPush) {
-                myPush = window.jPush;
-            }
+            isUsePush = true;
         }
-    } else {
-        //其它手机
+    }
+
+    //oppo手机
+    if (cnPushTool.isPlatformOppo()) {
+        if (window.oppoPush) {
+            myPush = window.oppoPush;
+            isUsePush = true;
+        }
+    }
+
+    if (!isUsePush && !cnPushTool.isPlatformIOS()) {
         if (window.jPush) {
             myPush = window.jPush;
         }
     }
+
     return myPush;
 }
 
