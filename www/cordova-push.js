@@ -24,6 +24,15 @@ function getCordovaPush() {
         }
     }
 
+    //小米手机
+    if (cnPushTool.isPlatformXiaomi()) {
+        if (window.xiaomiPush) {
+            myPush = window.xiaomiPush;
+            isUsePush = true;
+        }
+    }
+
+
     if (!isUsePush && !cnPushTool.isPlatformIOS()) {
         if (window.jPush) {
             myPush = window.jPush;
